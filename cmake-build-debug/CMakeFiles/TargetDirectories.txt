@@ -1,0 +1,3 @@
+G:/Programming/Projects/Libraries/ZSV/cmake-build-debug/CMakeFiles/ZSV.dir
+G:/Programming/Projects/Libraries/ZSV/cmake-build-debug/CMakeFiles/edit_cache.dir
+G:/Programming/Projects/Libraries/ZSV/cmake-build-debug/CMakeFiles/rebuild_cache.dir
