@@ -5,13 +5,15 @@
 #include <vector>
 
 class ZSV {
-    std::string filename;
+    // Filepath
+    std::string filepath;
     char delimiter{};
     std::vector<std::vector<std::string>> data;
 
 public:
-    explicit ZSV(const std::string& filename, char delimiter=',');
+    explicit ZSV(const std::string& filepath, char delimiter=',');
     void read();
+    void print() const;
 };
 
 #endif //ZSV_LIBRARY_H
