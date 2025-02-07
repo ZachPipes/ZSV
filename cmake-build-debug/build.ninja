@@ -49,9 +49,9 @@ cmake_ninja_workdir = G$:/Programming/Projects/Libraries/ZSV/cmake-build-debug/
 
 build cmake_object_order_depends_target_ZSV: phony || .
 
-build CMakeFiles/ZSV.dir/library.cpp.obj: CXX_COMPILER__ZSV_unscanned_Debug G$:/Programming/Projects/Libraries/ZSV/library.cpp || cmake_object_order_depends_target_ZSV
+build CMakeFiles/ZSV.dir/zsv.cpp.obj: CXX_COMPILER__ZSV_unscanned_Debug G$:/Programming/Projects/Libraries/ZSV/zsv.cpp || cmake_object_order_depends_target_ZSV
   DEFINES = -DZSV_EXPORTS
-  DEP_FILE = CMakeFiles\ZSV.dir\library.cpp.obj.d
+  DEP_FILE = CMakeFiles\ZSV.dir\zsv.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   INCLUDES = -IG:/Programming/Projects/Libraries/ZSV/include
   OBJECT_DIR = CMakeFiles\ZSV.dir
@@ -65,7 +65,7 @@ build CMakeFiles/ZSV.dir/library.cpp.obj: CXX_COMPILER__ZSV_unscanned_Debug G$:/
 #############################################
 # Link the shared library libZSV.dll
 
-build libZSV.dll libZSV.dll.a: CXX_SHARED_LIBRARY_LINKER__ZSV_Debug CMakeFiles/ZSV.dir/library.cpp.obj
+build libZSV.dll libZSV.dll.a: CXX_SHARED_LIBRARY_LINKER__ZSV_Debug CMakeFiles/ZSV.dir/zsv.cpp.obj
   LANGUAGE_COMPILE_FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\ZSV.dir
