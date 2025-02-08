@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iostream>
 
-ZSV::ZSV(const std::string& filepath, char delimiter)
+ZSV::ZSV(const std::string& filepath, const char delimiter)
 : filepath(filepath), delimiter(delimiter) {}
 
 void ZSV::read() {
@@ -23,14 +23,9 @@ void ZSV::read() {
             if (line[i] != delimiter) {
                 cell += line[i];
             } else {
-                headers.push_back(cell);
+                headers[cell] = i;
                 cell.clear();
             }
-        }
-
-        // If the cell is not empty, add the cell
-        if (!cell.empty()) {
-            headers.push_back(cell);
         }
     }
 
@@ -66,18 +61,51 @@ void ZSV::read() {
     inputFile.close();
 }
 
-void ZSV::write() {
+void ZSV::write() const {
+    // Opens file stream for selected filename
+    std::ofstream outputFile(filepath);
 
+    // Checks if file stream is open
+    if (!outputFile.is_open()) {
+        std::cerr << "Error opening file " << filepath << "!" << std::endl;
+    }
+
+    // Writes headers to a csv file
+    for (const std::pair<const std::string, int>& header : headers) {
+        outputFile << header.first;
+        if (headers.end()->second != header.second) {
+            outputFile << ", ";
+        } else {
+            outputFile << std::endl;
+        }
+    }
+
+    // Moves to the next line
+    outputFile << std::endl;
+
+    // Writes data to a csv file
+    for (int i = 0; i < data.size(); i++) {
+        for (int j = 0; j < data[i].size(); j++) {
+            outputFile << data[i][j];
+            if (j != data[i].size() - 1) {
+                outputFile << delimiter;
+            }
+        }
+        // Moves to the next line
+        outputFile << std::endl;
+    }
+
+    outputFile.close();
 }
 
 void ZSV::print() const {
     // Prints headers
-    for (int i = 0; i < headers.size(); i++) {
-        std::cout << headers[i];
-        if (i == headers.size() - 1) {
-            std::cout << std::endl;
+    for (const std::pair<const std::string, int>& header : headers) {
+        std::cout << header.first;
+        if (headers.end()->second != header.second) {
+            std::cout << ", ";
         } else {
-            std::cout <<",";
+            std::cout << std::endl;
         }
     }
 
@@ -93,3 +121,42 @@ void ZSV::print() const {
         }
     }
 }
+
+/// Getters and setters ///
+void ZSV::setFilepath(const std::string& newFilepath) {
+    filepath = newFilepath;
+}
+void ZSV::setDelimiter(const char newDelimiter) {
+    delimiter = newDelimiter;
+}
+void ZSV::setHeaders(const std::unordered_map<std::string, int>& newHeaders) {
+    headers = newHeaders;
+}
+void ZSV::setCell(const int row, const int y, const std::string& cell) {
+    data[row][y] = cell;
+}
+
+std::string ZSV::getFilepath() const {
+    return filepath;
+}
+char ZSV::getDelimiter() const {
+    return delimiter;
+}
+std::unordered_map<std::string, int> ZSV::getHeaders() const {
+    return headers;
+}
+std::string ZSV::getCell(const int row, const int col) const {
+    return data[row][col];
+}
+
+/// UNFINISHED ///
+/*std::vector<std::string> ZSV::getCol(const std::string& col) const {
+    std::vector<std::string> col;
+    // By row
+    for (int row = 0; row < data.size(); row++) {
+        // By col
+        for (int j = 0; j < data[row].size(); j++) {}
+    }
+
+    return col;
+}*/
